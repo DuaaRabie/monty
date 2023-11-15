@@ -1,6 +1,7 @@
 #ifndef MONTY_H
 #define MONTY_H
 
+#define _GNU_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -40,7 +41,6 @@ typedef struct instruction_s
 extern stack_t *stack;
 extern char *topush;
 extern  FILE *fp;
-extern char *line;
 
 void (*get_op(char *s))(stack_t **stack, unsigned int line_number);
 void op_push(stack_t **stack, unsigned int line_number);

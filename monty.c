@@ -1,5 +1,8 @@
 #include "monty.h"
 
+FILE *fp = NULL;
+stack_t *stack = NULL;
+char *topush = NULL, *line = NULL;
 /**
  * check - to check the command
  * @argc: arguments count
@@ -8,6 +11,7 @@
  */
 void check(int argc, char **argv)
 {
+
 	if (argc != 2)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
@@ -33,7 +37,7 @@ int main(int argc, char **argv)
 	unsigned int line_number = 0;
 	int i = 0, j = 0;
 	size_t len = 0;
-	char *linewspace = NULL;
+	char *linewspace = NULL, *topush = topush, *line = line;
 	void (*opfun)(stack_t **, unsigned int);
 
 	check(argc, argv);
@@ -50,14 +54,13 @@ int main(int argc, char **argv)
 			opfun = get_op(linewspace);
 			if (opfun == NULL)
 			{
-				free(line);
 				fclose(fp);
 				fprintf(stderr, "L%d: unknown instruction <opcode>\n", line_number);
 				exit(EXIT_FAILURE);
 			}
 			if (strncmp(linewspace, "push", 4) == 0)
 			{
-				for (i = 4, j = 0; i < (int)(len - 4); i++, j++)
+				for (i = 4, j = 0; i < (int)(strlen(linewspace - 4)); i++, j++)
 					topush[j] = linewspace[i];
 			}
 			opfun(&stack, line_number);

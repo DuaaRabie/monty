@@ -2,7 +2,7 @@
 
 /**
  * op_push - push opcode
- * @stach: stach header
+ * @stack: stach header
  * @line_number: line number
  * Return: nothing
  */
@@ -14,7 +14,6 @@ void op_push(stack_t **stack, unsigned int line_number)
 	for (i = 0; i < (int)strlen(topush); i++)
 		if (isdigit(topush[i]) == 0)
 		{
-			free(line);
 			fclose(fp);
 			fprintf(stderr, "L%d: usage: push integer", line_number);
 			exit(EXIT_FAILURE);
@@ -24,7 +23,6 @@ void op_push(stack_t **stack, unsigned int line_number)
 	new = malloc(sizeof(stack_t));
 	if (new == NULL)
 	{
-		free(line);
 		fclose(fp);
 		fprintf(stderr, "Error: malloc failed");
 		exit(EXIT_FAILURE);
@@ -39,8 +37,8 @@ void op_push(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * pall - pull all
- * @stach: stach header
+ * op_pall - pull all
+ * @stack: stach header
  * @line_number: line number
  * Return: nothing
  */
