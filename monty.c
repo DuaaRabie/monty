@@ -61,15 +61,19 @@ void interpret_line(char *line)
 }
 
 /**
- *
+ * is_not_empty - check empty line
+ * @line: line to check
+ * Return: 1 not empty | 0 empty
  */
-int is_not_empty(const char *line) {
-	while (*line != '\0') {
+int is_not_empty(const char *line)
+{
+	while (*line != '\0')
+	{
 		if (!isspace((unsigned char)*line))
-			return 1;
+			return (1);
 		line++;
 	}
-	return 0;
+	return (0);
 }
 
 /**
@@ -89,7 +93,7 @@ int main(int argc, char **argv)
 		line = NULL;
 		if (getline(&line, &len, vars.fp) != -1)
 		{
-			if(is_not_empty(line))
+			if (is_not_empty(line))
 				interpret_line(line);
 		}
 		else
