@@ -35,15 +35,15 @@ void interpret_line(char *line)
 	void (*opfun)(stack_t **, unsigned int);
 	char *linewspace;
 	static unsigned int line_number;
-	int i = 0, j = 0;
 
-	vars.topush = NULL;
 	linewspace = malloc(strlen(line) + 1);
+	vars.topush = malloc(strlen(line) + 1);
 	line_number++;
-	for (i = 0, j = 0; i < (int)(strlen(line)); i++)
-		if (line[i] != ' ' && line[i] != '\n')
-			linewspace[j++] = line[i];
-	linewspace[j] = '\0';
+
+	if (sscanf(line, "%s %s", linewspace, vars.topush) == 2)
+	{
+		;
+	}
 	opfun = get_op(linewspace);
 	if (opfun == NULL)
 	{
@@ -53,12 +53,6 @@ void interpret_line(char *line)
 		fclose(vars.fp);
 		fprintf(stderr, "L%d: unknown instruction <opcode>\n", line_number);
 		exit(EXIT_FAILURE);
-	}
-	if (strncmp(linewspace, "push", 4) == 0)
-	{
-		vars.topush = malloc(strlen(linewspace) - 3);
-		for (i = 4, j = 0; i <= (int)(strlen(linewspace)); i++, j++)
-			vars.topush[j] = linewspace[i];
 	}
 	free(linewspace);
 	free(line);
