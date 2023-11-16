@@ -40,7 +40,10 @@ void interpret_line(char *line)
 	vars.topush = malloc(strlen(line) + 1);
 	line_number++;
 
-	sscanf(line, "%s %s", opcode, vars.topush);
+	if (sscanf(line, "%s %s", opcode, vars.topush) == 2)
+	{
+		;
+	}
 	opfun = get_op(opcode);
 	if (opfun == NULL)
 	{
