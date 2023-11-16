@@ -39,7 +39,7 @@ typedef struct instruction_s
 } instruction_t;
 
 extern stack_t *stack;
-extern char *topush;
+extern char *topush, *line;
 extern  FILE *fp;
 
 void (*get_op(char *s))(stack_t **stack, unsigned int line_number);

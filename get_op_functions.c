@@ -16,9 +16,10 @@ void (*get_op(char *s))(stack_t **, unsigned int)
 
 	while (i < 2)
 	{
-		if (strncmp(s, ops[i].opcode, 4))
+		if (strncmp(s, ops[i].opcode, 4) == 0)
 			return (ops[i].f);
 		i++;
 	}
+	printf("NULL");
 	return (ops[i].f);
 }

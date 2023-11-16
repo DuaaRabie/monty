@@ -44,17 +44,19 @@ int main(int argc, char **argv)
 	check(argc, argv);
 	while (1)
 	{
-		line = NULL;
+		/*line = NULL;
 		topush = NULL;
-		linewspace = NULL;
+		linewspace = NULL;*/
 		if (getline(&line, &len, fp) != -1)
 		{
+			printf("line = %slength = %ld\n", line, strlen(line));
 			linewspace = malloc(strlen(line) * sizeof(char) + 1);
 			line_number++;
 			for (i = 0, j = 0; i < (int)(strlen(line)); i++)
 				if (line[i] != ' ' && line[i] != '\n')
 					linewspace[j++] = line[i];
 			linewspace[j] = '\0';
+			printf("linewspace = %s, length = %ld\n", linewspace, strlen(linewspace));
 			opfun = get_op(linewspace);
 			if (opfun == NULL)
 			{
@@ -68,8 +70,10 @@ int main(int argc, char **argv)
 				topush = malloc(strlen(linewspace) - 3);
 				for (i = 4, j = 0; i <= (int)(strlen(linewspace)); i++, j++)
 					topush[j] = linewspace[i];
+				printf("topush = %s, length = %ld\n", topush, strlen(topush));
 			}
 			opfun(&stack, line_number);
+			printf("next line\n");
 			if (strncmp(linewspace, "push", 4) == 0)
 				free(topush);
 			free(linewspace);	

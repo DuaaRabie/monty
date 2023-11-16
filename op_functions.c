@@ -14,15 +14,16 @@ void op_push(stack_t **stack, unsigned int line_number)
 	for (i = 0; i < (int)strlen(topush); i++)
 		if (isdigit(topush[i]) == 0)
 		{
+			free(line);
 			fclose(fp);
 			fprintf(stderr, "L%d: usage: push integer", line_number);
 			exit(EXIT_FAILURE);
 		}
 	n = atoi(topush);
-
 	new = malloc(sizeof(stack_t));
 	if (new == NULL)
 	{
+		free(line);
 		fclose(fp);
 		fprintf(stderr, "Error: malloc failed");
 		exit(EXIT_FAILURE);
@@ -47,8 +48,7 @@ void op_pall(stack_t **stack, unsigned int line_number)
 	stack_t *temp = *stack;
 
 	(void)line_number;
-	if (temp == NULL)
-
+	if (temp != NULL)
 		while (temp != NULL)
 		{
 			printf("%d\n", temp->n);
