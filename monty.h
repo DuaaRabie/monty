@@ -50,7 +50,7 @@ typedef struct instruction_s
 struct global_var
 {
 	stack_t *stack;
-	int topush;
+	char *topush;
 	FILE *fp;
 };
 extern struct global_var vars;
