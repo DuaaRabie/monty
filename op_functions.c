@@ -95,3 +95,32 @@ void op_pop(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 }
+
+/**
+ * op_swap - swap the top two elements
+ * @stack: stach header
+ * @line_number: line number
+ * Return: nothing
+ */
+void op_swap(stack_t **stack, unsigned int line_number)
+{
+	stack_t *temp1 = *stack;
+	stack_t *temp2;
+	
+	if (*stack != NULL && (*stack)->next != NULL)
+	{
+		temp2 = (*stack)->next;
+		*stack = temp2;
+		temp1->next = temp2->next;
+		if (temp1->next != NULL)
+			temp1->next->prev = temp1;
+		temp2->next = temp1;
+		temp1->prev = temp2;
+	}
+	else
+	{
+		fprintf(stderr, "L%u: can't swap, stack too short\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+
+}
