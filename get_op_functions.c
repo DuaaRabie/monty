@@ -16,7 +16,7 @@ void (*get_op(char *s))(stack_t **, unsigned int)
 
 	while (i < 2)
 	{
-		if (strncmp(s, ops[i].opcode, 4) == 0)
+		if (strcmp(s, ops[i].opcode) == 0)
 			return (ops[i].f);
 		i++;
 	}
