@@ -12,10 +12,11 @@ void (*get_op(char *s))(stack_t **, unsigned int)
 		{"push", op_push},
 		{"pall", op_pall},
 		{"pint", op_pint},
+		{"pop", op_pop},
 		{NULL, NULL}
 	};
 
-	while (i < 3)
+	while (i < 4)
 	{
 		if (strcmp(s, ops[i].opcode) == 0)
 			return (ops[i].f);

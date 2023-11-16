@@ -64,10 +64,35 @@ void op_pall(stack_t **stack, unsigned int line_number)
 void op_pint(stack_t **stack, unsigned int line_number)
 {
 	if (*stack != NULL)
-		fprintf(stdout, "%u\n", (*stack)->n);
+		fprintf(stdout, "%d\n", (*stack)->n);
 	else
 	{
 		fprintf(stderr, "L%u: can't pint, stack empty\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+}
+
+/**
+ * op_pop - removes the top element
+ * @stack: stach header
+ * @line_number: line number
+ * Return: nothing
+ */
+void op_pop(stack_t **stack, unsigned int line_number)
+{
+	stack_t *temp = *stack;
+
+	if (temp != NULL)
+	{
+		temp = temp->next;
+		free(*stack);
+		if (temp != NULL)
+			temp->prev = NULL;
+		*stack = temp;
+	}
+	else
+	{
+		fprintf(stderr, "L%u: can't pop an empty stack\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 }
