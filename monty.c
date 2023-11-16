@@ -51,7 +51,7 @@ void interpret_line(char *line)
 		free(line);
 		free(vars.topush);
 		fclose(vars.fp);
-		fprintf(stderr, "L%u: unknown instruction <opcode>\n", line_number);
+		fprintf(stderr, "L%u: unknown instruction %s\n", line_number, opcode);
 		exit(EXIT_FAILURE);
 	}
 	free(opcode);
