@@ -92,8 +92,8 @@ int main(int argc, char **argv)
 		line = NULL;
 		if (getline(&line, &len, vars.fp) != -1)
 		{
-			if (is_not_empty(line))
-				interpret_line(line);
+			/*if (is_not_empty(line))*/
+			interpret_line(line);
 		
 			free(line);
 		}
