@@ -1,8 +1,6 @@
 #include "monty.h"
 
-FILE *fp;
-stack_t *stack;
-char *topush, *line;
+struct global_var vars;
 
 /**
  * check - to check the command
@@ -19,14 +17,54 @@ void check(int argc, char **argv)
 		exit(EXIT_FAILURE);
 	}
 
-	fp = fopen(argv[1], "r");
-	if (fp == NULL)
+	vars.fp = fopen(argv[1], "r");
+	if (vars.fp == NULL)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
 }
 
+/**
+ * interpret_line - interpret line
+ * @line: the read line
+ * Return: nothing
+ */
+void interpret_line(char *line)
+{
+	void (*opfun)(stack_t **, unsigned int);
+	char *linewspace;
+	static unsigned int line_number;
+	int i = 0, j = 0;
+
+	vars.topush = NULL;
+	linewspace = NULL;
+	linewspace = malloc(strlen(line) + 1);
+	line_number++;
+	for (i = 0, j = 0; i < (int)(strlen(line)); i++)
+		if (line[i] != ' ' && line[i] != '\n')
+			linewspace[j++] = line[i];
+	linewspace[j] = '\0';
+	opfun = get_op(linewspace);
+	if (opfun == NULL)
+	{
+		free(linewspace);
+		free(line);
+		fclose(vars.fp);
+		fprintf(stderr, "L%d: unknown instruction <opcode>\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	if (strncmp(linewspace, "push", 4) == 0)
+	{
+		vars.topush = malloc(strlen(linewspace) - 3);
+		for (i = 4, j = 0; i <= (int)(strlen(linewspace)); i++, j++)
+			vars.topush[j] = linewspace[i];
+	}
+	free(linewspace);
+	free(line);
+	opfun(&vars.stack, line_number);
+	free(vars.topush);
+}
 /**
  * main - entry point
  * @argc: arguments count
@@ -35,49 +73,18 @@ void check(int argc, char **argv)
  */
 int main(int argc, char **argv)
 {
-	unsigned int line_number = 0;
-	int i = 0, j = 0;
 	size_t len = 0;
-	char *linewspace = NULL;
-	void (*opfun)(stack_t **, unsigned int);
+	char *line;
 
 	check(argc, argv);
 	while (1)
 	{
 		line = NULL;
-		topush = NULL;
-		linewspace = NULL;
-		if (getline(&line, &len, fp) != -1)
-		{
-			linewspace = malloc(strlen(line) * sizeof(char) + 1);
-			line_number++;
-			for (i = 0, j = 0; i < (int)(strlen(line)); i++)
-				if (line[i] != ' ' && line[i] != '\n')
-					linewspace[j++] = line[i];
-			linewspace[j] = '\0';
-			opfun = get_op(linewspace);
-			if (opfun == NULL)
-			{
-
-				fclose(fp);
-				fprintf(stderr, "L%d: unknown instruction <opcode>\n", line_number);
-				exit(EXIT_FAILURE);
-			}
-			if (strncmp(linewspace, "push", 4) == 0)
-			{
-				topush = malloc(strlen(linewspace) - 3);
-				for (i = 4, j = 0; i <= (int)(strlen(linewspace)); i++, j++)
-					topush[j] = linewspace[i];
-			}
-			opfun(&stack, line_number);
-			if (strncmp(linewspace, "push", 4) == 0)
-				free(topush);
-			free(linewspace);	
-			free(line);
-		}
+		if (getline(&line, &len, vars.fp) != -1)
+			interpret_line(line);
 		else
 			break;
 	}
-	fclose(fp);
+	fclose(vars.fp);
 	return (0);
 }

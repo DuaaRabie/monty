@@ -38,12 +38,26 @@ typedef struct instruction_s
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-extern stack_t *stack;
-extern char *topush, *line;
-extern  FILE *fp;
+/**
+ * struct global_var - all my global variables
+ * @stack: the head of the stack
+ * @topush: value to push
+ * @line: the read line
+ * @fp: file pointer
+ * 
+ * Description: all global variables needed to use
+ */
+struct global_var
+{
+	stack_t *stack;
+	char *topush;
+	FILE *fp;
+};
+extern struct global_var vars;
 
 void (*get_op(char *s))(stack_t **stack, unsigned int line_number);
 void op_push(stack_t **stack, unsigned int line_number);
 void op_pall(stack_t **stack, unsigned int line_number);
+void interpret_line(char *line);
 
 #endif

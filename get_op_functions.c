@@ -20,6 +20,5 @@ void (*get_op(char *s))(stack_t **, unsigned int)
 			return (ops[i].f);
 		i++;
 	}
-	printf("NULL");
 	return (ops[i].f);
 }
