@@ -16,7 +16,7 @@ void op_push(stack_t **stack, unsigned int line_number)
 		{
 			free(vars.topush);
 			fclose(vars.fp);
-			fprintf(stderr, "L%d: usage: push integer", line_number);
+			fprintf(stderr, "L%d: usage: push integer\n", line_number);
 			exit(EXIT_FAILURE);
 		}
 	n = atoi(vars.topush);
@@ -25,7 +25,7 @@ void op_push(stack_t **stack, unsigned int line_number)
 	{
 		free(vars.topush);
 		fclose(vars.fp);
-		fprintf(stderr, "Error: malloc failed");
+		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
 
