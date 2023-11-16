@@ -55,7 +55,6 @@ void interpret_line(char *line)
 		exit(EXIT_FAILURE);
 	}
 	free(opcode);
-	free(line);
 	opfun(&vars.stack, line_number);
 	free(vars.topush);
 }
@@ -95,6 +94,7 @@ int main(int argc, char **argv)
 		{
 			if (is_not_empty(line))
 				interpret_line(line);
+			free(line);
 		}
 		else
 		{
