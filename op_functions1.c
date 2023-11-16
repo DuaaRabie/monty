@@ -50,7 +50,7 @@ void op_pall(stack_t **stack, unsigned int line_number)
 	(void)line_number;
 	while (temp != NULL)
 	{
-		fprintf(stdout ,"%d\n", temp->n);
+		fprintf(stdout, "%d\n", temp->n);
 		temp = temp->next;
 	}
 }
@@ -106,7 +106,7 @@ void op_swap(stack_t **stack, unsigned int line_number)
 {
 	stack_t *temp1 = *stack;
 	stack_t *temp2;
-	
+
 	if (*stack != NULL && (*stack)->next != NULL)
 	{
 		temp2 = (*stack)->next;
