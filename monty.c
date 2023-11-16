@@ -33,28 +33,28 @@ void check(int argc, char **argv)
 void interpret_line(char *line)
 {
 	void (*opfun)(stack_t **, unsigned int);
-	char *linewspace;
+	char *opcode;
 	static unsigned int line_number;
 
-	linewspace = malloc(strlen(line) + 1);
+	opcode = malloc(strlen(line) + 1);
 	vars.topush = malloc(strlen(line) + 1);
 	line_number++;
 
-	if (sscanf(line, "%s %s", linewspace, vars.topush) == 2)
+	if (sscanf(line, "%s %s", opcode, vars.topush) == 2)
 	{
 		;
 	}
-	opfun = get_op(linewspace);
+	opfun = get_op(opcode);
 	if (opfun == NULL)
 	{
-		free(linewspace);
+		free(opcode);
 		free(line);
 		free(vars.topush);
 		fclose(vars.fp);
-		fprintf(stderr, "L%d: unknown instruction <opcode>\n", line_number);
+		fprintf(stderr, "L%d: unknown instruction %s\n", line_number, opcode);
 		exit(EXIT_FAILURE);
 	}
-	free(linewspace);
+	free(opcode);
 	free(line);
 	opfun(&vars.stack, line_number);
 	free(vars.topush);
