@@ -94,6 +94,7 @@ int main(int argc, char **argv)
 		{
 			if (is_not_empty(line))
 				interpret_line(line);
+			interpret_line(line);
 			free(line);
 		}
 		else
