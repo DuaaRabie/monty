@@ -11,10 +11,11 @@ void (*get_op(char *s))(stack_t **, unsigned int)
 	instruction_t ops[] = {
 		{"push", op_push},
 		{"pall", op_pall},
+		{"pint", op_pint},
 		{NULL, NULL}
 	};
 
-	while (i < 2)
+	while (i < 3)
 	{
 		if (strcmp(s, ops[i].opcode) == 0)
 			return (ops[i].f);

@@ -54,3 +54,22 @@ void op_pall(stack_t **stack, unsigned int line_number)
 		temp = temp->next;
 	}
 }
+
+/**
+ * op_pint - prints the value at the top
+ * @stack: stach header
+ * @line_number: line number
+ * Return: nothing
+ */
+void op_pint(stack_t **stack, unsigned int line_number)
+{
+	stack_t *temp = *stack;
+
+	if (temp != NULL)
+		printf("%d\n", temp->n);
+	else
+	{
+		fprintf(stderr, "L%u: can't pint, stack empty", line_number);
+		exit(EXIT_FAILURE);
+	}
+}
