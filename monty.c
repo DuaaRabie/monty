@@ -51,7 +51,7 @@ void interpret_line(char *line)
 		free(line);
 		free(vars.topush);
 		fclose(vars.fp);
-		fprintf(stderr, "L%d: unknown instruction %s\n", line_number, opcode);
+		fprintf(stderr, "L%u: unknown instruction <opcode>\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 	free(opcode);
@@ -59,6 +59,19 @@ void interpret_line(char *line)
 	opfun(&vars.stack, line_number);
 	free(vars.topush);
 }
+
+/**
+ *
+ */
+int is_not_empty(const char *line) {
+	while (*line != '\0') {
+		if (!isspace((unsigned char)*line))
+			return 1;
+		line++;
+	}
+	return 0;
+}
+
 /**
  * main - entry point
  * @argc: arguments count
@@ -75,7 +88,10 @@ int main(int argc, char **argv)
 	{
 		line = NULL;
 		if (getline(&line, &len, vars.fp) != -1)
-			interpret_line(line);
+		{
+			if(is_not_empty(line))
+				interpret_line(line);
+		}
 		else
 		{
 			free(line);

@@ -16,7 +16,7 @@ void op_push(stack_t **stack, unsigned int line_number)
 		{
 			free(vars.topush);
 			fclose(vars.fp);
-			fprintf(stderr, "L%d: usage: push integer\n", line_number);
+			fprintf(stderr, "L%u: usage: push integer\n", line_number);
 			exit(EXIT_FAILURE);
 		}
 	n = atoi(vars.topush);
@@ -48,10 +48,9 @@ void op_pall(stack_t **stack, unsigned int line_number)
 	stack_t *temp = *stack;
 
 	(void)line_number;
-	if (temp != NULL)
-		while (temp != NULL)
-		{
-			printf("%d\n", temp->n);
-			temp = temp->next;
-		}
+	while (temp != NULL)
+	{
+		printf("%d\n", temp->n);
+		temp = temp->next;
+	}
 }
