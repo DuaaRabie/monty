@@ -50,7 +50,7 @@ void op_pall(stack_t **stack, unsigned int line_number)
 	(void)line_number;
 	while (temp != NULL)
 	{
-		fprintf(stdout, "%d\n", temp->n);
+		fprintf(stderr, "%d\n", temp->n);
 		temp = temp->next;
 	}
 }

@@ -40,10 +40,7 @@ void interpret_line(char *line)
 	vars.topush = malloc(strlen(line) + 1);
 	line_number++;
 
-	if (sscanf(line, "%s %s", opcode, vars.topush) == 2)
-	{
-		;
-	}
+	sscanf(line, "%s %s", opcode, vars.topush);
 	opfun = get_op(opcode);
 	if (opfun == NULL)
 	{
@@ -51,7 +48,7 @@ void interpret_line(char *line)
 		free(line);
 		free(vars.topush);
 		fclose(vars.fp);
-		fprintf(stderr, "L%u: unknown instruction <opcode>\n", line_number);
+		fprintf(stderr, "L%u: unknown instruction %s\n", line_number, opcode);
 		exit(EXIT_FAILURE);
 	}
 	free(opcode);
