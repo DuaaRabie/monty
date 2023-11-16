@@ -38,7 +38,6 @@ void interpret_line(char *line)
 	int i = 0, j = 0;
 
 	vars.topush = NULL;
-	linewspace = NULL;
 	linewspace = malloc(strlen(line) + 1);
 	line_number++;
 	for (i = 0, j = 0; i < (int)(strlen(line)); i++)
@@ -50,6 +49,7 @@ void interpret_line(char *line)
 	{
 		free(linewspace);
 		free(line);
+		free(vars.topush);
 		fclose(vars.fp);
 		fprintf(stderr, "L%d: unknown instruction <opcode>\n", line_number);
 		exit(EXIT_FAILURE);
@@ -83,7 +83,10 @@ int main(int argc, char **argv)
 		if (getline(&line, &len, vars.fp) != -1)
 			interpret_line(line);
 		else
+		{
+			free(line);
 			break;
+		}
 	}
 	fclose(vars.fp);
 	return (0);
