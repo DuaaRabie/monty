@@ -41,9 +41,9 @@ void interpret_line(char *line, unsigned int line_number)
 	if (opcode == NULL || vars.topush == NULL)
 	{
 		if (opcode != NULL)
-			free(vars.topush);
-		else
 			free(opcode);
+		else
+			free(vars.topush);
 		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
@@ -103,10 +103,10 @@ int main(int argc, char **argv)
 		if (getline(&line, &len, vars.fp) != -1)
 		{
 			line_number++;
-			if (is_not_empty(line))
+			/*if (is_not_empty(line))*/
 				interpret_line(line, line_number);
-			else
-				free(line);
+			/*else
+				free(line);*/
 		}
 		else
 		{
