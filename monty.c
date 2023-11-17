@@ -105,8 +105,7 @@ int main(int argc, char **argv)
 			line_number++;
 			if (is_not_empty(line))
 				interpret_line(line, line_number);
-			else
-				free(line);
+			free(line);
 		}
 		else
 		{
