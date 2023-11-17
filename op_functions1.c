@@ -14,10 +14,13 @@ void op_push(stack_t **stack, unsigned int line_number)
 	for (i = 0; i < (int)strlen(vars.topush); i++)
 		if (isdigit(vars.topush[i]) == 0)
 		{
-			free(vars.topush);
-			fclose(vars.fp);
-			fprintf(stderr, "L%u: usage: push integer\n", line_number);
-			exit(EXIT_FAILURE);
+			if (vars.topush[i] != '-' && vars.topush[i] != '+' )
+			{
+				free(vars.topush);
+				fclose(vars.fp);
+				fprintf(stderr, "L%u: usage: push integer\n", line_number);
+				exit(EXIT_FAILURE);
+			}
 		}
 	n = atoi(vars.topush);
 	new = malloc(sizeof(stack_t));
