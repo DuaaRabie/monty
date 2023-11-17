@@ -17,9 +17,10 @@ void topush_check(unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 	for (i = 0; vars.topush[i] != '\0'; i++)
+	{
 		if (isdigit(vars.topush[i]) == 0)
 		{
-			if (vars.topush[i] != '-' && vars.topush[i] != '+')
+			if (vars.topush[i] != '-')
 			{
 				free(vars.topush);
 				fclose(vars.fp);
@@ -27,4 +28,5 @@ void topush_check(unsigned int line_number)
 				exit(EXIT_FAILURE);
 			}
 		}
+	}
 }
