@@ -3,7 +3,7 @@
 struct global_var vars;
 
 /**
- * check - to check the command
+ * check_cmd - to check the command
  * @argc: arguments count
  * @argv: arguments vector
  * Return: nothing
