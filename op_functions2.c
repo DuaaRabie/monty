@@ -28,8 +28,7 @@ void op_add(stack_t **stack, unsigned int line_number)
 		n1 = (*stack)->n;
 		*stack = (*stack)->next;
 		free(temp);
-		if (*stack != NULL)
-			(*stack)->prev = NULL;
+		(*stack)->prev = NULL;
 		(*stack)->n = (*stack)->n + n1;
 	}
 	else

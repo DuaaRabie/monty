@@ -1,8 +1,8 @@
 #include "monty.h"
 
 /**
- * check_topush - check to push
- *
+ * topush_check - check to push
+ * @line_number: the line number
  * Return: nothing
  */
 void topush_check(unsigned int line_number)
