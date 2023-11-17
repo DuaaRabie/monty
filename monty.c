@@ -28,13 +28,13 @@ void check(int argc, char **argv)
 /**
  * interpret_line - interpret line
  * @line: the read line
+ * @line_number: number of the line
  * Return: nothing
  */
-void interpret_line(char *line)
+void interpret_line(char *line, unsigned int line_number)
 {
 	void (*opfun)(stack_t **, unsigned int);
 	char *opcode;
-	static unsigned int line_number;
 
 	opcode = malloc(strlen(line) + 1);
 	vars.topush = malloc(strlen(line) + 1);
@@ -47,7 +47,6 @@ void interpret_line(char *line)
 		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
-	line_number++;
 
 	if (sscanf(line, "%s %s", opcode, vars.topush) == 2)
 	{
@@ -95,6 +94,7 @@ int main(int argc, char **argv)
 {
 	size_t len = 0;
 	char *line;
+	unsigned int line_number = 0;
 
 	check(argc, argv);
 	while (1)
@@ -102,8 +102,9 @@ int main(int argc, char **argv)
 		line = NULL;
 		if (getline(&line, &len, vars.fp) != -1)
 		{
+			line_number++;
 			if (is_not_empty(line))
-				interpret_line(line);
+				interpret_line(line, line_number);
 			else
 				free(line);
 		}
