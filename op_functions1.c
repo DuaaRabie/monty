@@ -75,7 +75,7 @@ void op_pop(stack_t **stack, unsigned int line_number)
 {
 	stack_t *temp = *stack;
 
-	if (*stack != NULL)
+	if (*stack != NULL || stack == NULL)
 	{
 		*stack = (*stack)->next;
 		free(temp);
