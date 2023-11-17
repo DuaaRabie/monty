@@ -11,6 +11,13 @@ void op_push(stack_t **stack, unsigned int line_number)
 	stack_t *new;
 	int n, i;
 
+	if (vars.topush[0] == '\0')
+	{
+		free(vars.topush);
+		fclose(vars.fp);
+		fprintf(stderr, "L%u: usage: push integer\n", line_number);
+		exit(EXIT_FAILURE);
+	}
 	for (i = 0; i < (int)strlen(vars.topush); i++)
 		if (isdigit(vars.topush[i]) == 0)
 		{
@@ -22,25 +29,22 @@ void op_push(stack_t **stack, unsigned int line_number)
 				exit(EXIT_FAILURE);
 			}
 		}
-	if (vars.topush[0] != '\0')
+	n = atoi(vars.topush);
+	new = malloc(sizeof(stack_t));
+	if (new == NULL)
 	{
-		n = atoi(vars.topush);
-		new = malloc(sizeof(stack_t));
-		if (new == NULL)
-		{
-			free(vars.topush);
-			fclose(vars.fp);
-			fprintf(stderr, "Error: malloc failed\n");
-			exit(EXIT_FAILURE);
-		}
-
-		new->next = *stack;
-		if (*stack != NULL)
-			(*stack)->prev = new;
-		new->prev = NULL;
-		*stack = new;
-		new->n = n;
+		free(vars.topush);
+		fclose(vars.fp);
+		fprintf(stderr, "Error: malloc failed\n");
+		exit(EXIT_FAILURE);
 	}
+
+	new->next = *stack;
+	if (*stack != NULL)
+		(*stack)->prev = new;
+	new->prev = NULL;
+	*stack = new;
+	new->n = n;
 }
 
 /**
