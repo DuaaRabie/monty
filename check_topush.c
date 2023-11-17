@@ -13,7 +13,7 @@ void topush_check(unsigned int line_number)
 	{
 		free(vars.topush);
 		fclose(vars.fp);
-		fprintf(stderr, "L%u: usage: push integer\n", line_number);
+		fprintf(stderr, "L%d: usage: push integer\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 	for (i = 0; vars.topush[i] != '\0'; i++)
@@ -24,7 +24,7 @@ void topush_check(unsigned int line_number)
 			{
 				free(vars.topush);
 				fclose(vars.fp);
-				fprintf(stderr, "L%u: usage: push integer\n", line_number);
+				fprintf(stderr, "L%d: usage: push integer\n", line_number);
 				exit(EXIT_FAILURE);
 			}
 		}

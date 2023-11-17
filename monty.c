@@ -42,7 +42,7 @@ void interpret_line(char *line, unsigned int line_number)
 	{
 		if (opcode != NULL)
 			free(opcode);
-		else
+		if (vars.topush != NULL)
 			free(vars.topush);
 		free(line);
 		fclose(vars.fp);
