@@ -50,7 +50,7 @@ void op_pall(stack_t **stack, unsigned int line_number)
 	(void)line_number;
 	while (temp != NULL)
 	{
-		fprintf(stderr, "%d\n", temp->n);
+		fprintf(stdout, "%d\n", temp->n);
 		temp = temp->next;
 	}
 }
@@ -64,7 +64,7 @@ void op_pall(stack_t **stack, unsigned int line_number)
 void op_pint(stack_t **stack, unsigned int line_number)
 {
 	if (*stack != NULL)
-		fprintf(stderr, "%d\n", (*stack)->n);
+		fprintf(stdout, "%d\n", (*stack)->n);
 	else
 	{
 		fprintf(stderr, "L%u: can't pint, stack empty\n", line_number);
