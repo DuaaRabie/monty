@@ -9,26 +9,9 @@
 void op_push(stack_t **stack, unsigned int line_number)
 {
 	stack_t *new;
-	int n, i;
+	int n;
 
-	if (vars.topush[0] == '\0')
-	{
-		free(vars.topush);
-		fclose(vars.fp);
-		fprintf(stderr, "L%u: usage: push integer\n", line_number);
-		exit(EXIT_FAILURE);
-	}
-	for (i = 0; vars.topush[i] != '\0'; i++)
-		if (isdigit(vars.topush[i]) == 0)
-		{
-			if (vars.topush[i] != '-' && vars.topush[i] != '+')
-			{
-				free(vars.topush);
-				fclose(vars.fp);
-				fprintf(stderr, "L%u: usage: push integer\n", line_number);
-				exit(EXIT_FAILURE);
-			}
-		}
+	topush_check(line_number);
 	n = atoi(vars.topush);
 	new = malloc(sizeof(stack_t));
 	if (new == NULL)

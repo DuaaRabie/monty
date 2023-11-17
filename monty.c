@@ -8,7 +8,7 @@ struct global_var vars;
  * @argv: arguments vector
  * Return: nothing
  */
-void check(int argc, char **argv)
+void check_cmd(int argc, char **argv)
 {
 
 	if (argc != 2)
@@ -97,7 +97,7 @@ int main(int argc, char **argv)
 	char *line;
 	unsigned int line_number = 0;
 
-	check(argc, argv);
+	check_cmd(argc, argv);
 	while (1)
 	{
 		line = NULL;
