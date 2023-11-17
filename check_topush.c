@@ -20,7 +20,7 @@ void topush_check(unsigned int line_number)
 	{
 		if (isdigit(vars.topush[i]) == 0)
 		{
-			if (vars.topush[i] != '-')
+			if (vars.topush[i] != '-' && vars.topush[i] != '+')
 			{
 				free(vars.topush);
 				fclose(vars.fp);
