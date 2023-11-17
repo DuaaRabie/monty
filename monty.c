@@ -36,7 +36,6 @@ void interpret_line(char *line, unsigned int line_number)
 	void (*opfun)(stack_t **, unsigned int);
 	char *opcode = NULL;
 
-	vars.topush = NULL;
 	vars.topush = malloc(strlen(line) + 1);
 	opcode = malloc(strlen(line) + 1);
 	vars.topush = malloc(strlen(line) + 1);
