@@ -44,10 +44,11 @@ void interpret_line(char *line, unsigned int line_number)
 			free(opcode);
 		else
 			free(vars.topush);
+		free(line);
+		fclose(vars.fp);
 		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
-
 	if (sscanf(line, "%s %s", opcode, vars.topush) == 2)
 	{
 		;
