@@ -34,10 +34,12 @@ void check_cmd(int argc, char **argv)
 void interpret_line(char *line, unsigned int line_number)
 {
 	void (*opfun)(stack_t **, unsigned int);
-	char *opcode;
+	char *opcode = NULL;
 
-	opcode = malloc(strlen(line) + 1);
+	vars.topush = NULL;
 	vars.topush = malloc(strlen(line) + 1);
+	opcode = malloc(strlen(line) + 1);
+/*	vars.topush = malloc(strlen(line) + 1);
 	if (opcode == NULL || vars.topush == NULL)
 	{
 		if (opcode != NULL)
@@ -48,7 +50,8 @@ void interpret_line(char *line, unsigned int line_number)
 		fclose(vars.fp);
 		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
-	}
+	}*/
+
 	if (sscanf(line, "%s %s", opcode, vars.topush) == 2)
 	{
 		;
@@ -56,11 +59,11 @@ void interpret_line(char *line, unsigned int line_number)
 	opfun = get_op(opcode);
 	if (opfun == NULL)
 	{
-		free(opcode);
 		free(line);
 		free(vars.topush);
 		fclose(vars.fp);
 		fprintf(stderr, "L%u: unknown instruction %s\n", line_number, opcode);
+		free(opcode);
 		exit(EXIT_FAILURE);
 	}
 	free(opcode);
