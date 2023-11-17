@@ -14,7 +14,7 @@ void op_push(stack_t **stack, unsigned int line_number)
 	for (i = 0; i < (int)strlen(vars.topush); i++)
 		if (isdigit(vars.topush[i]) == 0)
 		{
-			if (vars.topush[i] != '-' && vars.topush[i] != '+' )
+			if (vars.topush[i] != '-' && vars.topush[i] != '+')
 			{
 				free(vars.topush);
 				fclose(vars.fp);
@@ -22,22 +22,25 @@ void op_push(stack_t **stack, unsigned int line_number)
 				exit(EXIT_FAILURE);
 			}
 		}
-	n = atoi(vars.topush);
-	new = malloc(sizeof(stack_t));
-	if (new == NULL)
+	if (vars.topush[0] != '\0')
 	{
-		free(vars.topush);
-		fclose(vars.fp);
-		fprintf(stderr, "Error: malloc failed\n");
-		exit(EXIT_FAILURE);
-	}
+		n = atoi(vars.topush);
+		new = malloc(sizeof(stack_t));
+		if (new == NULL)
+		{
+			free(vars.topush);
+			fclose(vars.fp);
+			fprintf(stderr, "Error: malloc failed\n");
+			exit(EXIT_FAILURE);
+		}
 
-	new->next = *stack;
-	if (*stack != NULL)
-		(*stack)->prev = new;
-	new->prev = NULL;
-	*stack = new;
-	new->n = n;
+		new->next = *stack;
+		if (*stack != NULL)
+			(*stack)->prev = new;
+		new->prev = NULL;
+		*stack = new;
+		new->n = n;
+	}
 }
 
 /**
@@ -70,7 +73,7 @@ void op_pint(stack_t **stack, unsigned int line_number)
 		fprintf(stdout, "%d\n", (*stack)->n);
 	else
 	{
-		fprintf(stderr, "L%u: can't pint, stack empty\n", line_number);
+		fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 }
@@ -94,7 +97,7 @@ void op_pop(stack_t **stack, unsigned int line_number)
 	}
 	else
 	{
-		fprintf(stderr, "L%u: can't pop an empty stack\n", line_number);
+		fprintf(stderr, "L%d: can't pop an empty stack\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 }
