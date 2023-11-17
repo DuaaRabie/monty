@@ -103,10 +103,10 @@ int main(int argc, char **argv)
 		if (getline(&line, &len, vars.fp) != -1)
 		{
 			line_number++;
-			/*if (is_not_empty(line))*/
+			if (is_not_empty(line))
 				interpret_line(line, line_number);
-			/*else
-				free(line);*/
+			else
+				free(line);
 		}
 		else
 		{
