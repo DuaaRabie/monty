@@ -39,7 +39,7 @@ void interpret_line(char *line, unsigned int line_number)
 	vars.topush = NULL;
 	vars.topush = malloc(strlen(line) + 1);
 	opcode = malloc(strlen(line) + 1);
-/*	vars.topush = malloc(strlen(line) + 1);
+	vars.topush = malloc(strlen(line) + 1);
 	if (opcode == NULL || vars.topush == NULL)
 	{
 		if (opcode != NULL)
@@ -50,7 +50,7 @@ void interpret_line(char *line, unsigned int line_number)
 		fclose(vars.fp);
 		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
-	}*/
+	}
 
 	if (sscanf(line, "%s %s", opcode, vars.topush) == 2)
 	{
