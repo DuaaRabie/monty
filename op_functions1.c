@@ -28,6 +28,7 @@ void op_push(stack_t **stack, unsigned int line_number)
 	new->prev = NULL;
 	*stack = new;
 	new->n = n;
+
 }
 
 /**
@@ -41,10 +42,12 @@ void op_pall(stack_t **stack, unsigned int line_number)
 	stack_t *temp = *stack;
 
 	(void)line_number;
-	while (temp != NULL)
+	while (*stack != NULL)
 	{
-		fprintf(stdout, "%d\n", temp->n);
-		temp = temp->next;
+		temp = *stack;
+		fprintf(stdout, "%d\n", (*stack)->n);
+		*stack = (*stack)->next;
+		free(temp);
 	}
 }
 

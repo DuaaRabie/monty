@@ -34,7 +34,7 @@ void check_cmd(int argc, char **argv)
 void interpret_line(char *line, unsigned int line_number)
 {
 	void (*opfun)(stack_t **, unsigned int);
-	char *opcode = NULL;
+	char *opcode;
 
 	opcode = malloc(strlen(line) + 1);
 	vars.topush = malloc(strlen(line) + 1);
@@ -57,11 +57,11 @@ void interpret_line(char *line, unsigned int line_number)
 	opfun = get_op(opcode);
 	if (opfun == NULL)
 	{
+		fprintf(stderr, "L%d: unknown instruction %s\n", line_number, opcode);
 		free(line);
 		free(vars.topush);
-		fclose(vars.fp);
-		fprintf(stderr, "L%d: unknown instruction %s\n", line_number, opcode);
 		free(opcode);
+		fclose(vars.fp);
 		exit(EXIT_FAILURE);
 	}
 	free(opcode);
