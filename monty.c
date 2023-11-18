@@ -97,6 +97,7 @@ int main(int argc, char **argv)
 	size_t len = 0;
 	char *line;
 	unsigned int line_number = 0;
+	stack_t *temp;
 
 	check_cmd(argc, argv);
 	while (1)
@@ -115,6 +116,12 @@ int main(int argc, char **argv)
 			free(line);
 			break;
 		}
+	}
+	while (vars.stack != NULL)
+	{
+		temp = vars.stack;
+		vars.stack = vars.stack->next;
+		free(temp);
 	}
 	fclose(vars.fp);
 	return (0);

@@ -42,12 +42,10 @@ void op_pall(stack_t **stack, unsigned int line_number)
 	stack_t *temp = *stack;
 
 	(void)line_number;
-	while (*stack != NULL)
+	while (temp != NULL)
 	{
-		temp = *stack;
-		fprintf(stdout, "%d\n", (*stack)->n);
-		*stack = (*stack)->next;
-		free(temp);
+		fprintf(stdout, "%d\n", temp->n);
+		temp = temp->next;
 	}
 }
 
