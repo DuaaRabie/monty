@@ -82,8 +82,7 @@ void op_pstr(stack_t **stack, unsigned int line_number)
 			temp = temp->next;
 			c = temp->n;
 		}
-		if (temp == NULL)
-			putchar('\n');
+		putchar('\n');
 	}
 	else
 	{
