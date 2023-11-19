@@ -46,7 +46,7 @@ void op_pchar(stack_t **stack, unsigned int line_number)
 		c = (*stack)->n;
 		if (c >= 0 && c <= 127)
 		{
-			putchar(c);
+			fprintf(stdout, "%c\n", c);
 		}
 		else
 		{
