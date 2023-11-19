@@ -16,10 +16,12 @@ void (*get_op(char *s))(stack_t **, unsigned int)
 		{"swap", op_swap},
 		{"add", op_add},
 		{"nop", op_nop},
+		{"sub", op_sub},
 		{NULL, NULL}
 	};
+	int ops_len = (int)((sizeof(ops) / sizeof(ops[0])) - 1);
 
-	while (i < 7)
+	while (i < ops_len)
 	{
 		if (strcmp(s, ops[i].opcode) == 0)
 			return (ops[i].f);

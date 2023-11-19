@@ -55,7 +55,7 @@ void op_sub(stack_t **stack, unsigned int line_number)
 		*stack = (*stack)->next;
 		free(temp);
 		(*stack)->prev = NULL;
-		(*stack)->n = n1 - (*stack)->n;
+		(*stack)->n = (*stack)->n - n1;
 	}
 	else
 	{
