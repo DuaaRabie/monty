@@ -20,6 +20,8 @@ void (*get_op(char *s))(stack_t **, unsigned int)
 		{"div", op_div},
 		{"mul", op_mul},
 		{"mod", op_mod},
+		{"pchar", op_pchar},
+		{"pstr", op_pstr},
 		{NULL, NULL}
 	};
 	int ops_len = (int)((sizeof(ops) / sizeof(ops[0])) - 1);
@@ -30,5 +32,7 @@ void (*get_op(char *s))(stack_t **, unsigned int)
 			return (ops[i].f);
 		i++;
 	}
+	if (s[0] == '#')
+		return (ops[6].f);
 	return (ops[i].f);
 }
