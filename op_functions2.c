@@ -78,16 +78,15 @@ void op_div(stack_t **stack, unsigned int line_number)
 	if (*stack != NULL && (*stack)->next != NULL)
 	{
 		n1 = (*stack)->n;
-		*stack = (*stack)->next;
-		free(temp);
-		(*stack)->prev = NULL;
 		if (n1 == 0)
 		{
 			fprintf(stderr, "L%u: divsion by zero\n", line_number);
 			exit(EXIT_FAILURE);
 		}
-		else
-			(*stack)->n = (*stack)->n / n1;
+		*stack = (*stack)->next;
+		free(temp);
+		(*stack)->prev = NULL;
+		(*stack)->n = (*stack)->n / n1;
 	}
 	else
 	{
