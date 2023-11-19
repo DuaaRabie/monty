@@ -80,7 +80,7 @@ void op_div(stack_t **stack, unsigned int line_number)
 		n1 = (*stack)->n;
 		if (n1 == 0)
 		{
-			fprintf(stderr, "L%u: divsion by zero\n", line_number);
+			fprintf(stderr, "L%u: division by zero\n", line_number);
 			exit(EXIT_FAILURE);
 		}
 		*stack = (*stack)->next;
