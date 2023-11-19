@@ -83,6 +83,8 @@ void op_pstr(stack_t **stack, unsigned int line_number)
 			temp = temp->next;
 			c = temp->n;
 		}
+		putchar('\n');
 	}
-	fprintf(stderr, "\n");
+	else
+		fprintf(stderr, "\n");
 }
