@@ -90,5 +90,5 @@ void op_pstr(stack_t **stack, unsigned int line_number)
 		putchar('\n');
 	}
 	else
-		fprintf(stderr, "0\n");
+		fprintf(stderr, "\n\n");
 }
