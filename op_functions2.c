@@ -65,10 +65,36 @@ void op_sub(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * op_div - devide the top two elements
- * @stack: stach header
+ * op_mul - multiply the top two elements
+ * @stack: stack header
  * @line_number: line number
  * Return: nothing
+ */
+void op_mul(stack_t **stack, unsigned int line_number)
+{
+	stack_t *temp = *stack;
+	int n1;
+
+	if (*stack != NULL && (*stack)->next != NULL)
+	{
+		n1 = (*stack)->n;
+		*stack = (*stack)->next;
+		free(temp);
+		(*stack)->prev = NULL;
+		(*stack)->n = (*stack)->n * n1;
+	}
+	else
+	{
+		fprintf(stderr, "L%u: can't mul, stack too short\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+}
+
+/**
+ *  op_div - devide the top two elements
+ *  @stack: stack header
+ *  @line_number: line number
+ *  Return: nothing
  */
 void op_div(stack_t **stack, unsigned int line_number)
 {
