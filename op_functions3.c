@@ -77,11 +77,17 @@ void op_pstr(stack_t **stack, unsigned int line_number)
 	{
 		c = temp->n;
 
-		while (temp != NULL && (c > 0 && c <= 127))
+		while (temp != NULL)
 		{
-			putchar(c);
-			temp = temp->next;
-			c = temp->n;
+			if (c > 0 && c <= 127)
+			{
+				putchar(c);
+				temp = temp->next;
+				c = temp->n;
+			}
+			else
+				break;
+			
 		}
 		putchar('\n');
 	}
