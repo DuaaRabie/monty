@@ -65,5 +65,6 @@ void op_nop(stack_t **stack, unsigned int line_number);
 void op_add(stack_t **stack, unsigned int line_number);
 void topush_check(unsigned int line_number);
 void check_cmd(int argc, char **argv);
+void op_sub(stack_t **stack, unsigned int line_number);
 
 #endif
