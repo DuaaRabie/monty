@@ -22,6 +22,7 @@ void (*get_op(char *s))(stack_t **, unsigned int)
 		{"mod", op_mod},
 		{"pchar", op_pchar},
 		{"pstr", op_pstr},
+		{"rotl", op_rotl},
 		{NULL, NULL}
 	};
 	int ops_len = (int)((sizeof(ops) / sizeof(ops[0])) - 1);

@@ -85,10 +85,35 @@ void op_pstr(stack_t **stack, unsigned int line_number)
 			}
 			else
 				break;
-			
+
 		}
 		putchar('\n');
 	}
 	else
 		fprintf(stdout, "\n");
+}
+
+/**
+ * op_rotl - prints the str at the top
+ * @stack: stack header
+ * @line_number: line number
+ * Return: nothing
+ */
+void op_rotl(stack_t **stack, unsigned int line_number)
+{
+	stack_t *first = *stack, *temp = *stack;
+
+	(void)line_number;
+	if (*stack != NULL && (*stack)->next != NULL)
+	{
+		*stack = (*stack)->next;
+		(*stack)->prev = NULL;
+
+		while (temp->next != NULL)
+			temp = temp->next;
+
+		temp->next = first;
+		first->next = NULL;
+		first->prev = temp;
+	}
 }
