@@ -62,7 +62,7 @@ void op_pchar(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * op_str - prints the str
+ * op_pstr - prints the str
  * @stack: stack header
  * @line_number: line number
  * Return: nothing
